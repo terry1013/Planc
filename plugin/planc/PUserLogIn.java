@@ -155,7 +155,7 @@ public class PUserLogIn extends AbstractRecordDataInput implements PropertyChang
 	 * @param usr - user
 	 * @param pass - password
 	 * 
-	 * @return user record or <code>null</code> if any connection error
+	 * @return user record or <code>null</code> if any error
 	 * @see #autenticationApp(String, String)
 	 * 
 	 */
@@ -173,7 +173,13 @@ public class PUserLogIn extends AbstractRecordDataInput implements PropertyChang
 
 			// 171221: oracle autentication dont need aditional parameters verification
 			r2 = dbAccess.exist("username = '" + usr + "'");
-			r2 = checkUserParameters(r2);
+			// 180405: if user dont exist show error
+			if (r2 == null) {
+				showAplicationExceptionMsg("security.msg09");
+				return null;
+			} else {
+				r2 = checkUserParameters(r2);
+			}
 		} catch (Exception e) {
 			showAplicationException(new AplicationException("security.msg04", e.getMessage()));
 		}
@@ -265,7 +271,7 @@ public class PUserLogIn extends AbstractRecordDataInput implements PropertyChang
 	 */
 	public static String[] getJdbcProperties(String... pn) {
 		String[] rs = null;
-		SystemLog.info("Looking for SlePlance parameters in externa file.");
+		SystemLog.info("Looking for parameters in externa file.");
 		try {
 			Properties cfgp = new Properties();
 			cfgp.load(new FileInputStream(TResourceUtils.getFile("config.properties")));

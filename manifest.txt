@@ -16,6 +16,7 @@ Instalación:
 Resumen de cambios
 ========================================
 
+1824 - Presenta error "usuario no existe" para metodo de autenticacion autenticationOracleDB 
 1823 - Nuevo funcion: Soporte para configuracion externa de parametros de conexion (solo para SleOracle) usando archivo de texto. (ver documentacion en config.properties y jdbc.properties)
 1822 - Modificacion en codigo para exportar archivos en excel (SLEReport)
 1821 - Lógica de negocios: Explorador de presupuesto solo considera cuentas planificadas (type_id=0)

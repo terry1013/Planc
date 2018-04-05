@@ -218,7 +218,7 @@ public class PlanC {
 			frame.setVisible(true);
 
 			// backdoor for developers
-			if (true) {
+			if (false) {
 				SwingUtilities.invokeLater(new Runnable() {
 
 					@Override
