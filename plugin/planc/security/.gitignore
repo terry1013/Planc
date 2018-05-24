@@ -18,3 +18,7 @@
 /UserAutorizationsTree.class
 /UserAutorizationsPayrollImport.class
 /UserAutorizationsPayrollImportRecord.class
+/CurrencyExchange.class
+/CurrencyExchangeRecord.class
+/PasswordPolicy.class
+/PasswordPolicyRecord.class

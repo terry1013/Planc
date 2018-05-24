@@ -65,14 +65,20 @@ public class TCheckBoxNodeEditor extends AbstractCellEditor implements TreeCellE
 	public Component getTreeCellEditorComponent(JTree tree, Object value, boolean selected, boolean expanded,
 			boolean leaf, int row) {
 
-		JCheckBox jcb = (JCheckBox) renderer.getTreeCellRendererComponent(tree, value, true, expanded, leaf, row, true);
-		// copy properties
-		editor.setForeground(jcb.getForeground());
-		editor.setBackground(jcb.getBackground());
-		editor.setText(jcb.getText());
-		editor.setSelected(jcb.isSelected());
-		editor.setPreferredSize(jcb.getPreferredSize());
-		return editor;
+		Component comp = renderer.getTreeCellRendererComponent(tree, value, true, expanded, leaf, row, true);
+		try {
+			JCheckBox jcb = (JCheckBox) renderer.getTreeCellRendererComponent(tree, value, true, expanded, leaf, row, true);
+			// copy properties
+			editor.setForeground(jcb.getForeground());
+			editor.setBackground(jcb.getBackground());
+			editor.setText(jcb.getText());
+			editor.setSelected(jcb.isSelected());
+			editor.setPreferredSize(jcb.getPreferredSize());
+			comp = editor;
+		} catch (ClassCastException e) {
+			// this execption is caused when perform a tree filter. see tabstrabctree.markisleaf method
+		}
+		return comp ;
 	}
 
 	@Override

@@ -86,7 +86,7 @@ public class UserRecord extends AbstractRecordDataInput {
 		// if new, init password = OTP
 		if (newr) {
 			// 1234 << old otp
-			String uid = (String) r.getFieldValue("usrname");
+			String uid = (String) r.getFieldValue("username");
 			r.setFieldValue("password", TStringUtils.getOneTimePassword(uid));
 		}
 		return r;

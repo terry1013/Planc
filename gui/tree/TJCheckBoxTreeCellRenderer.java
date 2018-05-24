@@ -70,6 +70,16 @@ public class TJCheckBoxTreeCellRenderer extends TDefaultTreeCellRenderer {
 		checkBox.setSelected(s);
 		// FIXME: temporal size to try show all text !! fix this shit !!!!!!
 		checkBox.setPreferredSize(new Dimension(250, getPreferredSize().height));
+		setPreferredSize(new Dimension(250, getPreferredSize().height));
+		/*
+		 * 180524: TODO: temporal: check if exist the isLeaf field. this field (if exist) finaly determine if a node is
+		 * leaf or not. see documentation on mackLeafNodes on tabstractree for more info 
+		 */
+		try {
+			leaf = (boolean) rcd.getFieldValue("isLeaf");
+		} catch (Exception e) {
+			// leaf field dont exist. cotinue
+		}
 		return leaf ? checkBox : this;
 	}
 }

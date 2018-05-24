@@ -482,10 +482,10 @@ public class PlanC {
 		// ---------------------------------------------------------------
 		menu = new JMenu(TStringUtils.getBundleString("main.menuitem.help"));
 		// g7.add(new Help());
-		menu.add(new UpdateManifestView());
-		menu.add(new JSeparator(JSeparator.HORIZONTAL));
-		menu.add(new DockingAction(Wellcome.class));
-		menu.add(new DockingAction(HelpBrowser.class));
+//		menu.add(new UpdateManifestView());
+//		menu.add(new JSeparator(JSeparator.HORIZONTAL));
+		// menu.add(new DockingAction(Wellcome.class));
+		// menu.add(new DockingAction(HelpBrowser.class));
 		// HelpRecorderAction act = new HelpRecorderAction();
 		// act.setEnabled(SLESession.getUserFieldValue("t_ususer_id").equals("*master"));
 		// g7.add(act);
@@ -497,7 +497,7 @@ public class PlanC {
 		// menu.add(maf);
 
 		menu.add(new About());
-		// menuBar.add(menu);
+		menuBar.add(menu);
 
 		// ---------------------------------------------------------------
 		// user

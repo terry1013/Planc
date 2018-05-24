@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.*;
 
 import javax.naming.*;
+import javax.naming.ldap.*;
 import javax.swing.*;
 
 import action.*;
@@ -120,7 +121,7 @@ public class PUserLogIn extends AbstractRecordDataInput implements PropertyChang
 	 */
 	private Record autenticationLDAP(String usr, String pass) {
 		// LdapContext ctx = null;
-		String purl = SystemVariables.getStringVar("ldapPROVIDER_URL");
+		String purl = SystemVariables.getStringVar("ldapprovider_url");
 		Record r2 = null;
 		try {
 			Hashtable env = new Hashtable();
@@ -131,7 +132,8 @@ public class PUserLogIn extends AbstractRecordDataInput implements PropertyChang
 			env.put(Context.SECURITY_CREDENTIALS, pass);
 			env.put(Context.PROVIDER_URL, purl);
 			// TODO: extract data form context to update app user file
-			// ctx = new InitialLdapContext(env, null);
+//			InitialLdapContext ctx = new InitialLdapContext(env, null);
+			new InitialLdapContext(env, null);
 
 			r2 = dbAccess.exist("username = '" + usr + "'");
 			r2 = checkUserParameters(r2);
@@ -141,7 +143,7 @@ public class PUserLogIn extends AbstractRecordDataInput implements PropertyChang
 		} catch (Exception ex) {
 			// ex.printStackTrace();
 			// TODO: translate from ldap error to correspondent aplication exeption
-			showAplicationException(new AplicationException("security.msg04", ex.getClass().getName() + ": "
+			showAplicationException(new AplicationException("security.msg04", ex.getClass().getSimpleName() + ": "
 					+ ex.getMessage()));
 		}
 		return r2;

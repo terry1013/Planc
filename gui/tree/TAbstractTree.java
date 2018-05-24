@@ -45,7 +45,8 @@ import core.datasource.*;
  */
 public abstract class TAbstractTree extends UIComponentPanel
 		implements
-			ActionPerformer, EditableList,
+			ActionPerformer,
+			EditableList,
 			TreeSelectionListener,
 			Exportable {
 
@@ -76,6 +77,29 @@ public abstract class TAbstractTree extends UIComponentPanel
 		this.nodeNameField = na;
 		this.subNodeField = sn;
 		putClientProperty(TConstants.TREE_EXPANDED, false);
+	}
+
+	/**
+	 * TEMPOARAL METHOD: this mark the isLeaf field on the record inside of {@link DefaultMutableTreeNode}. this is to
+	 * solve some sincronization issues between {@link TreeCellRenderer} and {@link TreeCellEditor} when a tree is
+	 * editable and support search.
+	 * <p>
+	 * this fix is for trees that have search suport and are editable. in some searchs, an element that is not dessire
+	 * to be editet is remain as leaf in a search result. subclass of tabstracttree must determine which node are
+	 * editable or not.
+	 * <p>
+	 * interested class in this marck suport, must call this method inmediately after
+	 * {@link #setServiceRequest(ServiceRequest)}
+	 */
+	public void markLeafNodes() {
+		JTree jt = getJTree();
+		for (int i = 0; i < jt.getRowCount(); i++) {
+			TreePath tp = jt.getPathForRow(i);
+			DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.getLastPathComponent();
+			TEntry te = (TEntry) dmtn.getUserObject();
+			Record r = (Record) te.getKey();
+			r.setFieldValue("isLeaf", dmtn.isLeaf());
+		}
 	}
 
 	/**
@@ -167,11 +191,9 @@ public abstract class TAbstractTree extends UIComponentPanel
 				Record rcd = getRecord();
 				ok = ConnectionManager.getAccessTo(rcd.getTableName()).delete(rcd);
 				/*
-				Record[] rcds = getRecords();
-				for (int rc = 0; rc < rcds.length; rc++) {
-					ok = ConnectionManager.getAccessTo(rcds[rc].getTableName()).delete(rcds[rc]);
-				}
-				*/
+				 * Record[] rcds = getRecords(); for (int rc = 0; rc < rcds.length; rc++) { ok =
+				 * ConnectionManager.getAccessTo(rcds[rc].getTableName()).delete(rcds[rc]); }
+				 */
 			} else {
 				ok = false;
 			}
@@ -197,7 +219,6 @@ public abstract class TAbstractTree extends UIComponentPanel
 				treeModel.setRoot(originalRoot);
 				tree.setModel(treeModel);
 				tree.updateUI();
-				return;
 			} else {
 				DefaultMutableTreeNode filteredRoot = copyNode(originalRoot);
 				TreeNodeBuilder b = new TreeNodeBuilder(text);

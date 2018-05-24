@@ -1,12 +1,10 @@
-2018-03-16 10:52:37 Connecting to database CsvJdbc () with *autoconnection=false
-2018-03-16 10:52:37 Connecting to database Flicka () with *autoconnection=false
-2018-03-16 10:52:37 Looking for SlePlance parameters in externa file.
-2018-03-16 10:52:37 Error trying to retrive parameters from external property file.
-2018-03-16 10:52:37 jdbc.properties (El sistema no puede encontrar el archivo especificado)
-java.io.FileNotFoundException: jdbc.properties (El sistema no puede encontrar el archivo especificado)
-	at java.io.FileInputStream.open(Native Method)
-	at java.io.FileInputStream.<init>(Unknown Source)
-	at plugin.planc.PUserLogIn.getJdbcProperties(PUserLogIn.java:274)
-	at core.PlanC.initEnviorement(PlanC.java:576)
-	at core.PlanC.main(PlanC.java:169)
-
+2018-05-24 18:32:01 Connecting to database CsvJdbc () with *autoconnection=false
+2018-05-24 18:32:01 Connecting to database Flicka () with *autoconnection=false
+2018-05-24 18:32:01 Looking for parameters in externa file.
+2018-05-24 18:32:01 Connecting to database SleOracle (SLEPLANC) with *autoconnection=true
+2018-05-24 18:32:05 Connecting to database eTeam () with *autoconnection=false
+2018-05-24 18:32:06 Plugin MailBomber not installed because property plugin.active = false
+2018-05-24 18:32:06 Plugin SLEPlanC found
+2018-05-24 18:32:06 Plugin SLEPlanC.startPlugin() sucsefully
+2018-05-24 18:32:06 Plugin XDoc not installed because property plugin.active = false
+2018-05-24 18:32:29 Looking for parameters in externa file.

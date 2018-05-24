@@ -1,9 +1,6 @@
 package plugin.planc.security;
 
-import javax.swing.*;
-
 import gui.*;
-
 
 import com.jgoodies.forms.builder.*;
 import com.jgoodies.forms.layout.*;
@@ -27,18 +24,17 @@ public class RolesRecord extends AbstractRecordDataInput {
 	public RolesRecord(Record rcd, boolean newr) {
 		super(null, rcd, newr);
 
-		JTextField jtf = TUIUtils.getJTextField("ttid", rcd.getFieldValue("id").toString(), 10);
-		addInputComponent("id", jtf , true, newr);
+		addInputComponent("id", TUIUtils.getJTextField(rcd, "id"), true, newr);
 		addInputComponent("name", TUIUtils.getJTextField(rcd, "name"), true, true);
 
-		FormLayout lay = new FormLayout("left:pref, 3dlu, pref, 100dlu", // columns
+		FormLayout lay = new FormLayout("left:pref, 3dlu, pref, 150dlu", // columns
 				"p, 3dlu, p, p"); // rows
 		// lay.setColumnGroups(new int[][] { { 1, 5 }, { 3, 7 } });
 		CellConstraints cc = new CellConstraints();
 		PanelBuilder build = new PanelBuilder(lay);
 
 		build.add(getLabelFor("id"), cc.xy(1, 1));
-		build.add(getInputComponent("id"), cc.xy(3, 1));
+		build.add(getInputComponent("id"), cc.xyw(3, 1, 2));
 		build.add(getLabelFor("name"), cc.xy(1, 3));
 		build.add(getInputComponent("name"), cc.xyw(1, 4, 4));
 

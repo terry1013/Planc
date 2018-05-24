@@ -27,6 +27,7 @@ public class OptionsTree extends TAbstractTree implements CellEditorListener, Do
 		putClientProperty(TConstants.TREE_EXPANDED, true);
 		putClientProperty(TConstants.TREE_ICON_FIELD, "module_id");
 		putClientProperty(TConstants.TREE_BOOLEAN_FIELD, "autorized");
+		setToolBar(true);
 	}
 
 	@Override
@@ -41,6 +42,15 @@ public class OptionsTree extends TAbstractTree implements CellEditorListener, Do
 	}
 
 	@Override
+	public void filterTree(String text) {
+		super.filterTree(text);
+		JTree jt = getJTree();
+		for (int i = 0; i < jt.getRowCount(); i++) {
+			jt.expandRow(i);
+		}
+	}
+	
+	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		Object src = evt.getSource();
 		Object prp = evt.getPropertyName();
@@ -52,12 +62,14 @@ public class OptionsTree extends TAbstractTree implements CellEditorListener, Do
 				serviceRequest.setData(rr.getFieldValue("id"));
 				enableActions(TAbstractAction.TABLE_SCOPE, true);
 				setServiceRequest(serviceRequest);
+				markLeafNodes();
 				getNodeEditor().addCellEditorListener(this);
 			} else {
 				setMessage("sle.ui.msg18");
 			}
 		}
 	}
+	
 
 	@Override
 	public void editingStopped(ChangeEvent e) {

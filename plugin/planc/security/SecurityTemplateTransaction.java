@@ -50,6 +50,7 @@ public class SecurityTemplateTransaction extends AbstractTransaction {
 		rModel.addNewField(new Field("sub_node", "", 20));
 		rModel.addNewField(new Field("field_name", "", 20));
 		rModel.addNewField(new Field("autorized", false, 1));
+		rModel.addNewField(new Field("isleaf", false, 1));
 
 		tmpdba.ignoreSecurity();
 		Vector <Record> tmplist = tmpdba.search(null, null);
@@ -63,6 +64,7 @@ public class SecurityTemplateTransaction extends AbstractTransaction {
 			r1.addNewField(new Field("sub_node", "", 20));
 			r1.addNewField(new Field("field_name", "", 20));
 			r1.addNewField(new Field("autorized", false, 1));
+			r1.addNewField(new Field("isleaf", false, 1));
 			rList.add(r1);
 			
 			// new subnode for see option

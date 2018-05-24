@@ -33,6 +33,7 @@ public class SecurityTemplateTree extends TAbstractTree implements DockingCompon
 		this.serviceRequest = new ServiceRequest(SecurityTemplateTransaction.class.getName(), null, null);
 		putClientProperty(TConstants.TREE_EXPANDED, true);
 		putClientProperty(TConstants.TREE_BOOLEAN_FIELD, "autorized");
+		setToolBar(true);
 	}
 
 	@Override
@@ -60,8 +61,17 @@ public class SecurityTemplateTree extends TAbstractTree implements DockingCompon
 				serviceRequest.setData(rr.getFieldValue("id"));
 				enableActions(TAbstractAction.TABLE_SCOPE, true);
 				setServiceRequest(serviceRequest);
+				markLeafNodes();
 				getNodeEditor().addCellEditorListener(this);
 			}
+		}
+	}
+	@Override
+	public void filterTree(String text) {
+		super.filterTree(text);
+		JTree jt = getJTree();
+		for (int i = 0; i < jt.getRowCount(); i++) {
+			jt.expandRow(i);
 		}
 	}
 
@@ -96,8 +106,8 @@ public class SecurityTemplateTree extends TAbstractTree implements DockingCompon
 					r1.setFieldValue("autorized", false);
 					tmodel.nodeChanged(dmtn);
 				}
-//				int[] ix = {1, 2, 3};
-//				tmodel.nodesChanged(parent, ix);
+				// int[] ix = {1, 2, 3};
+				// tmodel.nodesChanged(parent, ix);
 			}
 		} else {
 			Record mod1 = dba.exist(mod);

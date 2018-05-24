@@ -43,7 +43,7 @@ public class UserAutorizationsTransaction extends AbstractTransaction {
 
 		// record model
 		Field te[] = new Field[]{new Field("name", "", 30), new Field("node", "", 30), new Field("sub_node", "", 30),
-				new Field("autorized", false, 1), new Field("src_file", "", 30)};
+				new Field("autorized", false, 1),new Field("isleaf", false, 1), new Field("src_file", "", 30)};
 		this.rmodel = new Record("", te);
 
 		// final data list

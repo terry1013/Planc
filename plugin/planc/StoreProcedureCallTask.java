@@ -43,17 +43,17 @@ public class StoreProcedureCallTask implements TRunnable {
 			Statement sts = conn.createStatement();
 			String sp = "CALL sle_planc_calculator.generator('" + sessid + "', " + pscenario + ", " + irelation + ", "
 					+ ibu + ", " + icolumnid + ", " + ivaluecat + ", " + iaccountid + ")";
-			System.out.println(sp);
-			long t1 = System.currentTimeMillis();
+//			System.out.println(sp);
+//			long t1 = System.currentTimeMillis();
 			sts.execute(sp);
 			conn.commit();
-			System.out.println("sle_planc_calculator.generator running time: " + (System.currentTimeMillis() - t1)
-					+ " millis");
+//			System.out.println("sle_planc_calculator.generator running time: " + (System.currentTimeMillis() - t1)
+//					+ " millis");
 			// signal dashboard to recalc
 			AmountViewer.getInstance().recalc();
 			PlanC.showNotification("notification.msg17");
 		} catch (Exception ex) {
-			SystemLog.logException(ex);
+//			SystemLog.logException(ex);
 			PlanC.showNotification("notification.msg00", ex.getMessage());
 		}
 	}

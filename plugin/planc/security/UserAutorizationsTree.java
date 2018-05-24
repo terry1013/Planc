@@ -89,11 +89,20 @@ public class UserAutorizationsTree extends TAbstractTree implements CellEditorLi
 				String fn = (String) sa.getValue(TAbstractAction.ICON_ID);
 				serviceRequest.setTableName(fn);
 				setServiceRequest(serviceRequest);
+				markLeafNodes();
 				getNodeEditor().addCellEditorListener(this);
 			}
 		}
 		// at end to show toolbar anytime
 		setVisibleToolBar(true);
+	}
+	@Override
+	public void filterTree(String text) {
+		super.filterTree(text);
+		JTree jt = getJTree();
+		for (int i = 0; i < jt.getRowCount(); i++) {
+			jt.expandRow(i);
+		}
 	}
 
 	@Override

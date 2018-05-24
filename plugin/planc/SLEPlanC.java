@@ -53,10 +53,13 @@ public class SLEPlanC extends PluginAdapter {
 		if (Session.isAutorizedForModule("omit_security")) {
 			jm = new JMenu("Seguridad");
 			jm.add(new RolesAction());
-			jm.add(new UserAction());
 			jm.add(new SecurityTemplateAction());
-			// 180125: bug18.2
-			// jm.add(getDockingComponentsFrom("security"));
+			jm.add(new UserAction());
+			jm.addSeparator();
+			MenuActionFactory maf = new MenuActionFactory(PasswordPolicy.class);
+			// has no planc id
+//			maf.putValue(SLEPlanC.PLANC_ID, 70330L);
+			jm.add(maf);
 			menuVector.add(jm);
 		}
 		// configuration

@@ -35,6 +35,7 @@ public class OptionsTransaction extends AbstractTransaction {
 		DBAccess tmpdba = ConnectionManager.getAccessTo("sle_options");
 		this.rModel = tmpdba.getModel();
 		rModel.addNewField(new Field("autorized", false, 1));
+		rModel.addNewField(new Field("isLeaf", false, 1));
 
 		tmpdba.ignoreSecurity();
 		this.rList = tmpdba.search(null, null);
@@ -43,6 +44,7 @@ public class OptionsTransaction extends AbstractTransaction {
 		// append autorized field for tree view
 		for (Record r1 : rList) {
 			r1.addNewField(new Field("autorized", false, 1));
+			r1.addNewField(new Field("isLeaf", false, 1));
 			String oid = r1.getFieldValue("id").toString();
 			tmpdba.ignoreSecurity();
 			Record tmprcd = tmpdba.exist("role_id = '" + roleId + "' AND option_id = " + oid);
