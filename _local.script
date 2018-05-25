@@ -14,7 +14,7 @@ GRANT DBA TO SA
 SET WRITE_DELAY 10
 SET SCHEMA PUBLIC
 INSERT INTO T_LOCAL_PROPERTIES VALUES('','RemindUser','','aced0005737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001')
-INSERT INTO T_LOCAL_PROPERTIES VALUES('','User','','aced0005740008534c45504c414e43')
+INSERT INTO T_LOCAL_PROPERTIES VALUES('','User','','aced000574000565756c6572')
 INSERT INTO T_LOCAL_PROPERTIES VALUES('','pluginInstallInfo','plugin.planc.SLEPlanC','aced0005737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001')
 INSERT INTO T_LOCAL_PROPERTIES VALUES('SLEPLANC','DockingState','SLEPLANC','aced00057a0000013b0000000400000000020000002daced00057727000000001e706c7567696e2e706c616e632e73656375726974792e557365724c697374ffffffff0000003aaced00057734000000002b706c7567696e2e706c616e632e73656375726974792e557365724175746f72697a6174696f6e7354726565ffffffff0000000100000000000000020000000100000001000000020000000001ffffffffffffffff010000000100000001000000020000000101ffffffffffffffff01013f000000ffffffff01ffffffff01000000c800ffffffffffffffff00000000000000c800ffffffffffffffff00000000000000c800ffffffffffffffff00000000000000c800ffffffffffffffff000000000000000000000004ffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffffffffffffffffffff')
 INSERT INTO T_LOCAL_PROPERTIES VALUES('SLEPLANC','LastSelectedPath','','aced0005740025555345523d534c45504c414e433b434f4d50414e593d30313b5343454e4152494f3d32333b')
@@ -33,8 +33,9 @@ INSERT INTO T_SYSTEM_VAR VALUES('*system','FTPPass','','String','Contrace\u00f1a
 INSERT INTO T_SYSTEM_VAR VALUES('*system','FTPServer','ftp://Movi_server/MiTv/','String','Nombre servidor FTP','0')
 INSERT INTO T_SYSTEM_VAR VALUES('*system','FTPUser','eurosuites','String','Nombre de usuario para coneccion FTP','0')
 INSERT INTO T_SYSTEM_VAR VALUES('*system','OTPTimeout','60','Integer','Onte time password standar timeout in minutes','0')
-INSERT INTO T_SYSTEM_VAR VALUES('*system','autenticationMethod','autenticationOracleDB','String','alguno de los siguientes: autenticationLDAP, autenticationOracleDB, autenticationApp','B7-237-FA5')
-INSERT INTO T_SYSTEM_VAR VALUES('*system','ldapPROVIDER_URL','ldap://ldap.forumsys.com:389','String','Service provider for LDAP autentication','99-4FA-35B')
+INSERT INTO T_SYSTEM_VAR VALUES('*system','autenticationMethod','autenticationLDAP','String','alguno de los siguientes: autenticationLDAP, autenticationOracleDB, autenticationApp','B7-237-FA5')
+INSERT INTO T_SYSTEM_VAR VALUES('*system','ldap_provider_url','ldap://ldap.forumsys.com:389','String','Service provider for LDAP autentication','99-4FA-35B')
+INSERT INTO T_SYSTEM_VAR VALUES('*system','ldap_security_principals','uid=<user>,dc=example,dc=com','String','Context.SECURITY_PRINCIPAL string parameter. <user> and/or <password> will be replaced by their respective values','0')
 INSERT INTO T_SYSTEM_VAR VALUES('*system','signout','15','Integer','Tiempo en minutos para que la aplicacion finalize automaticamente la sesion','0')
 INSERT INTO T_SYSTEM_VAR VALUES('*system','updateID','1701','String','Identificador de ultima actualizacion','0')
 INSERT INTO T_SYSTEM_VAR VALUES('*system','updateManifest','updateManifest.txt','String','Nombre de archivo con manifiesto de actualizaciones','0')

@@ -1,7 +1,12 @@
 package plugin.planc;
 
+import gui.*;
+
 import java.sql.*;
 import java.util.*;
+import java.util.concurrent.*;
+
+import javax.swing.*;
 
 import plugin.planc.dashboard.*;
 import core.*;
@@ -16,6 +21,7 @@ public class StoreProcedureCallTask implements TRunnable {
 	private String icolumnid = "null";
 	private String ivaluecat = "null";
 	private String iaccountid = "null";
+	private TProgressMonitor monitor;
 
 	public StoreProcedureCallTask(Hashtable<String, Object> flds) {
 		pscenario = PlanCSelector.getNodeValue(PlanCSelector.SCENARIO);
@@ -34,11 +40,22 @@ public class StoreProcedureCallTask implements TRunnable {
 		iaccountid = val.equals("*all") ? "null" : val.toString();
 	}
 
+	public void setFuture(Future f, boolean ab) {
+		this.monitor =new TProgressMonitor("StoreProcedureAction", "StoreProcedureCallTask", null, false);
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				monitor.show(PlanC.frame);
+			}
+		});
+	}
+
 	@Override
 	public void run() {
 		try {
 			// for sonme reason, this sleep unlook the EDT. DONT DELETE
+			setFuture(null, false);
 			Thread.sleep(250);
+			monitor.setProgress(0, "StoreProcedureCallTask.msg");
 			Connection conn = ConnectionManager.getDBConnection("sleoracle");
 			Statement sts = conn.createStatement();
 			String sp = "CALL sle_planc_calculator.generator('" + sessid + "', " + pscenario + ", " + irelation + ", "
@@ -51,6 +68,7 @@ public class StoreProcedureCallTask implements TRunnable {
 //					+ " millis");
 			// signal dashboard to recalc
 			AmountViewer.getInstance().recalc();
+			monitor.dispose();
 			PlanC.showNotification("notification.msg17");
 		} catch (Exception ex) {
 //			SystemLog.logException(ex);

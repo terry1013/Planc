@@ -47,8 +47,8 @@ public class PUserLogIn extends AbstractRecordDataInput implements PropertyChang
 		this.usrmod = dbAccess.getModel();
 		setModel(usrmod);
 		addPropertyChangeListener(TConstants.ACTION_PERFORMED, this);
-		this.jtf_user_id = TUIUtils.getJTextField("ttusername", (String) usrmod.getFieldValue("username"), 10);
-		JPasswordField jtfp = TUIUtils.getJPasswordField("ttpassword", (String) usrmod.getFieldValue("password"), 10);
+		this.jtf_user_id = TUIUtils.getJTextField("ttusername", (String) usrmod.getFieldValue("username"), 20);
+		JPasswordField jtfp = TUIUtils.getJPasswordField("ttpassword", (String) usrmod.getFieldValue("password"), 20);
 		jtfp.setText("");
 		addInputComponent("username", jtf_user_id, true, true);
 		addInputComponent("password", jtfp, true, true);
@@ -59,7 +59,7 @@ public class PUserLogIn extends AbstractRecordDataInput implements PropertyChang
 		jtf_user_id.setText(str);
 		this.jcb_rem_usr = TUIUtils.getJCheckBox("security.r05", bol);
 
-		FormLayout lay = new FormLayout("left:pref, 3dlu, pref, 7dlu, left:pref, 3dlu, pref",
+		FormLayout lay = new FormLayout("left:pref, 3dlu, 80dlu, 7dlu, left:pref, 3dlu, 80dlu",
 				"pref, 3dlu, pref, 3dlu, pref, 3dlu, pref");
 		PanelBuilder bui = new PanelBuilder(lay);
 		CellConstraints cc = new CellConstraints();
@@ -121,28 +121,34 @@ public class PUserLogIn extends AbstractRecordDataInput implements PropertyChang
 	 */
 	private Record autenticationLDAP(String usr, String pass) {
 		// LdapContext ctx = null;
-		String purl = SystemVariables.getStringVar("ldapprovider_url");
+		String purl = SystemVariables.getStringVar("ldap_provider_url");
+
+		String secp = SystemVariables.getStringVar("ldap_security_principals");
+		secp = secp.replace("<user>", usr);
+		// secp = secp.replace("<password>", pass);
+
 		Record r2 = null;
 		try {
 			Hashtable env = new Hashtable();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
 			env.put(Context.SECURITY_AUTHENTICATION, "simple");
 			// env.put(Context.SECURITY_PRINCIPAL, "cn=read-only-admin,dc=example,dc=com");
-			env.put(Context.SECURITY_PRINCIPAL, "cn=" + usr + ",dc=example,dc=com");
+			env.put(Context.SECURITY_PRINCIPAL, secp);
 			env.put(Context.SECURITY_CREDENTIALS, pass);
 			env.put(Context.PROVIDER_URL, purl);
 			// TODO: extract data form context to update app user file
-//			InitialLdapContext ctx = new InitialLdapContext(env, null);
+			// InitialLdapContext ctx = new InitialLdapContext(env, null);
 			new InitialLdapContext(env, null);
 
 			r2 = dbAccess.exist("username = '" + usr + "'");
+			// LDAP pass but user not in internal tables
+			if (r2 == null) {
+				showAplicationException(new AplicationException("security.msg12"));
+				return null;
+			}
 			r2 = checkUserParameters(r2);
-
-			// TODO: update internal application field reading ldap configuration
-
 		} catch (Exception ex) {
 			// ex.printStackTrace();
-			// TODO: translate from ldap error to correspondent aplication exeption
 			showAplicationException(new AplicationException("security.msg04", ex.getClass().getSimpleName() + ": "
 					+ ex.getMessage()));
 		}
