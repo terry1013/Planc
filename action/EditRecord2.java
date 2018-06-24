@@ -26,9 +26,9 @@ import core.datasource.*;
  */
 public class EditRecord2 extends TAbstractAction implements PropertyChangeListener, DefaultDobleClicAction {
 
-	private AbstractRecordDataInput dataInput;
-	private JDialog dialog;
-	private RedirectAction redirectAction;
+	protected AbstractRecordDataInput dataInput;
+	protected JDialog dialog;
+	protected RedirectAction redirectAction;
 
 	public EditRecord2(EditableList el) {
 		super(TAbstractAction.RECORD_SCOPE);

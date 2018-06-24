@@ -21,25 +21,12 @@
 	<classpathentry kind="lib" path="lib/persistence/commons-csv-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/persistence/csvjdbc-1.0-31.jar"/>
 	<classpathentry kind="lib" path="lib/persistence/ojdbc14.jar"/>
-	<classpathentry kind="lib" path="plugin/mail/commons-email-1.4.jar"/>
-	<classpathentry kind="lib" path="plugin/mail/javax.mail.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreport/jasperreports-6.3.1.jar" sourcepath="C:/Users/terry/Documents/java/jasper soft &amp; related/jasperreport-6.3.1/jasperreports-6.3.1/src"/>
 	<classpathentry kind="lib" path="lib/jasperreport/jasperreports-chart-customizers-6.3.1.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreport/jasperreports-chart-themes-6.3.1.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreport/jasperreports-fonts-6.3.1.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreport/jasperreports-functions-6.3.1.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreport/jasperreports-javaflow-6.3.1.jar"/>
-	<classpathentry kind="lib" path="plugin/xdoc/lib/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="plugin/xdoc/lib/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="plugin/xdoc/lib/fr.opensagres.xdocreport.converter-1.0.2.jar"/>
-	<classpathentry kind="lib" path="plugin/xdoc/lib/fr.opensagres.xdocreport.core-1.0.2.jar"/>
-	<classpathentry kind="lib" path="plugin/xdoc/lib/fr.opensagres.xdocreport.document-1.0.2.jar"/>
-	<classpathentry kind="lib" path="plugin/xdoc/lib/fr.opensagres.xdocreport.document.docx-1.0.2.jar"/>
-	<classpathentry kind="lib" path="plugin/xdoc/lib/fr.opensagres.xdocreport.template-1.0.2.jar"/>
-	<classpathentry kind="lib" path="plugin/xdoc/lib/fr.opensagres.xdocreport.template.velocity-1.0.2.jar"/>
-	<classpathentry kind="lib" path="plugin/xdoc/lib/oro-2.0.8.jar"/>
-	<classpathentry kind="lib" path="plugin/xdoc/lib/velocity-1.7.jar"/>
-	<classpathentry kind="lib" path="plugin/xdoc/lib/zxing/core.jar"/>
 	<classpathentry kind="lib" path="lib/Swing/jcommon-1.0.23.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreport/commons-collections-3.2.2.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreport/commons-digester-2.1.jar"/>
@@ -61,5 +48,7 @@
 	<classpathentry kind="lib" path="lib/apache_poi/poi-scratchpad-3.16.jar"/>
 	<classpathentry kind="lib" path="lib/apache_poi/poi-3.16.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreport/poi-3.10.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-email-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/javax.mail.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
