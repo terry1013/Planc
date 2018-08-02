@@ -1,5 +1,8 @@
 package plugin.planc.security;
 
+import javax.swing.*;
+
+import plugin.planc.*;
 import gui.*;
 
 import com.jgoodies.forms.builder.*;
@@ -12,8 +15,11 @@ public class UserAutorizationsCalcTypesRecord extends AbstractRecordDataInput {
 
 	public UserAutorizationsCalcTypesRecord(Record rcd, boolean newr) {
 		super(null, rcd, newr);
+		TEntry[] telist = SLEPlanC.getTEntryGroupFromDB("authCalcType");
+		JComboBox jcb = TUIUtils.getJComboBox("ttallow_calc", telist, rcd.getFieldValue("allow_calc"));
+
 		addInputComponent("calc_type_id", TUIUtils.getJFormattedTextField(rcd, "calc_type_id"), true, newr);
-		addInputComponent("allow_calc", TUIUtils.getJTextField(rcd, "calc_type_id"), true, true);
+		addInputComponent("allow_calc", jcb, false, true);
 
 		FormLayout lay = new FormLayout("left:pref, 3dlu, 100dlu", "p, 3dlu, p");
 		CellConstraints cc = new CellConstraints();

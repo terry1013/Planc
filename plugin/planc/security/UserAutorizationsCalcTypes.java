@@ -4,6 +4,7 @@ import gui.*;
 
 import javax.swing.*;
 
+import plugin.planc.*;
 import action.*;
 import core.*;
 import core.datasource.*;
@@ -28,6 +29,7 @@ public class UserAutorizationsCalcTypes extends UIListPanel {
 	public void init() {
 		setServiceRequest(new ServiceRequest(ServiceRequest.DB_QUERY, "sle_user_calc_types", "user_id = "
 				+ usrRcd.getFieldValue("id")));
+		setReferenceColumn("allow_calc", SLEPlanC.getTEntryGroupFromDB("authCalcType"));
 	}
 	@Override
 	public UIComponentPanel getUIFor(AbstractAction aa) {

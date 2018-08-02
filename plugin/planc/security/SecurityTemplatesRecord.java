@@ -12,7 +12,6 @@ import javax.swing.border.*;
 
 import gui.*;
 
-
 import com.jgoodies.forms.builder.*;
 import com.jgoodies.forms.layout.*;
 
@@ -52,10 +51,14 @@ public class SecurityTemplatesRecord extends AbstractRecordDataInput {
 		addInputComponent("omit_report", getJCheckBox("omit_report"), false, true);
 		addInputComponent("omit_training", getJCheckBox("omit_training"), false, true);
 		addInputComponent("omit_custom", getJCheckBox("omit_custom"), false, true);
+		RecordSelector rs = new RecordSelector(
+				new ServiceRequest(ServiceRequest.DB_QUERY, "SLE_PASSWORD_POLICY", null), "id", "name",
+				rcd.getFieldValue("policy_id"), false);
+		addInputComponent("policy_id", rs, false, true);
 
 		// FormLayout lay = new FormLayout("left:pref, 3dlu, pref, 7dlu, left:pref, 3dlu, pref", // columns
 		FormLayout lay = new FormLayout("left:pref, 3dlu, pref, 200dlu", // columns
-				"p, 3dlu, p, 3dlu, p"); // rows
+				"p, 3dlu, p, 3dlu, p, 3dlu, p"); // rows
 		CellConstraints cc = new CellConstraints();
 		PanelBuilder build = new PanelBuilder(lay);
 
@@ -81,6 +84,9 @@ public class SecurityTemplatesRecord extends AbstractRecordDataInput {
 		jp1.add(Box.createGlue());
 		jp1.setBorder(new TitledBorder(TStringUtils.getBundleString("sle_security_templates.omit")));
 		build.add(jp1, cc.xyw(1, 5, 4));
+		
+		build.add(getLabelFor("policy_id"), cc.xy(1, 7));
+		build.add(getInputComponent("policy_id"), cc.xyw(3, 7, 2));
 
 		setDefaultActionBar();
 		add(build.getPanel());
@@ -91,6 +97,7 @@ public class SecurityTemplatesRecord extends AbstractRecordDataInput {
 	public Record getRecord() {
 		this.fields = super.getFields();
 		record.setFieldValue("name", fields.get("name"));
+		record.setFieldValue("policy_id", fields.get("policy_id"));
 
 		// all boolean fields to 0 1 Integer
 		for (int i = 0; i < record.getFieldCount(); i++) {

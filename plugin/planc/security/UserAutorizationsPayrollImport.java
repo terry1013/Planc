@@ -18,7 +18,7 @@ public class UserAutorizationsPayrollImport extends UIListPanel {
 	public UserAutorizationsPayrollImport(Record ur) {
 		super(null);
 		this.usrRcd = ur;
-		setToolBar(new NewRecord(this), new EditRecord(this), new ResetPassword(this), new DeleteRecord(this));
+		setToolBar(new NewRecord(this), new EditRecord(this), new DeleteRecord(this));
 		putClientProperty(TConstants.SHOW_COLUMNS, "co_pay;payroll_id;payroll_name");
 		putClientProperty(TConstants.ICON_PARAMETERS, "-1; ");
 		// putClientProperty(SLEPlanC.PLANC_ID, 50020L);

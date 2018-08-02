@@ -38,7 +38,7 @@ public class OptionsTransaction extends AbstractTransaction {
 		rModel.addNewField(new Field("isLeaf", false, 1));
 
 		tmpdba.ignoreSecurity();
-		this.rList = tmpdba.search(null, null);
+		this.rList = tmpdba.search("SYSTEM_ID = 'SLEPLANC'", null);
 		tmpdba = ConnectionManager.getAccessTo("sle_role_options");
 
 		// append autorized field for tree view

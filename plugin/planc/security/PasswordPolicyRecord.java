@@ -8,16 +8,16 @@ import com.jgoodies.forms.layout.*;
 import core.*;
 import core.datasource.*;
 
-/**
- * new/edit sle_scenario
- * 
- */
 public class PasswordPolicyRecord extends AbstractRecordDataInput {
 
 	public PasswordPolicyRecord(Record rcd, boolean newr) {
 		super(null, rcd, newr);
 
-		addInputComponent("id", TUIUtils.getJFormattedTextField(rcd, "id"), true, newr);
+//		for new record, generate new record id
+		if(newr) {
+			rcd.setFieldValue("id", System.currentTimeMillis());
+		}
+//		addInputComponent("id", TUIUtils.getJFormattedTextField(rcd, "id"), true, newr);
 		addInputComponent("name", TUIUtils.getJTextField(rcd, "name"), true, true);
 		addInputComponent("max_attemps", TUIUtils.getJFormattedTextField(rcd, "max_attemps"), true, true);
 		addInputComponent("expiry_period", TUIUtils.getJFormattedTextField(rcd, "expiry_period"), false, true);
@@ -40,8 +40,8 @@ public class PasswordPolicyRecord extends AbstractRecordDataInput {
 		CellConstraints cc = new CellConstraints();
 		PanelBuilder pb = new PanelBuilder(lay);
 
-		pb.add(getLabelFor("id"), cc.xy(1, 1));
-		pb.add(getInputComponent("id"), cc.xy(3, 1));
+//		pb.add(getLabelFor("id"), cc.xy(1, 1));
+//		pb.add(getInputComponent("id"), cc.xy(3, 1));
 		
 		pb.add(getLabelFor("name"), cc.xy(1, 3));
 		pb.add(getInputComponent("name"), cc.xyw(1, 4,7));

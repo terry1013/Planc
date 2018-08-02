@@ -22,7 +22,7 @@ public class PasswordPolicy extends UIListPanel {
 
 		this.request = new ServiceRequest(ServiceRequest.DB_QUERY, "SLE_PASSWORD_POLICY", null);
 		setToolBar(new NewRecord(this), new EditRecord(this), new DeleteRecord(this), new ExportToFileAction(this, ""));
-		putClientProperty(TConstants.SHOW_COLUMNS, "id;name;max_attemps;expiry_period");
+		putClientProperty(TConstants.SHOW_COLUMNS, "name;max_attemps;expiry_period");
 		putClientProperty(TConstants.ICON_PARAMETERS, "-1; ");
 		// putClientProperty(SLEPlanC.PLANC_ID, 70330L);
 	}
