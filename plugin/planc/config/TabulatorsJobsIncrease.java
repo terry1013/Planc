@@ -4,84 +4,80 @@ import gui.*;
 import gui.docking.*;
 
 import java.beans.*;
-import java.util.*;
 
 import javax.swing.*;
-import javax.swing.event.*;
-
-import core.*;
-import core.datasource.*;
 
 import plugin.planc.*;
-
+import action.*;
+import core.*;
+import core.datasource.*;
 
 /**
  * planc SLE_TAB_JOBS increase
  * 
  */
-public class TabulatorsJobsIncrease extends AbstractFileIncreaseSupport implements DockingComponent, CellEditorListener {
+public class TabulatorsJobsIncrease extends UIListPanel implements DockingComponent {
 
 	private Record tabvalRcd, jobRcd;
-	private String companyId;
+	private long tavid;
+	private String companyId, jobid;
 
 	public TabulatorsJobsIncrease() {
-		super();
+		super(null);
 		putClientProperty(TConstants.SHOW_COLUMNS, "step;amount");
 		putClientProperty(TConstants.ICON_PARAMETERS, "-1; ");
-		putClientProperty(TConstants.ALLOW_INPUT_FROM_CELL, false);
+		setToolBar(new NewRecord(this), new EditRecord(this), new DeleteRecord(this));
 	}
 
 	@Override
 	public void init() {
 		setView(TABLE_VIEW);
 		setMessage("sle.ui.msg06");
-		setFormattForColums(0, "Paso #0");
 	}
 
-	
 	@Override
 	public UIComponentPanel getUIFor(AbstractAction aa) {
-		return null;
+		UIComponentPanel pane = null;
+		if (aa instanceof NewRecord) {
+			Record mod = new Record(getRecordModel());
+			mod.setFieldValue("TAB_VALIDITY_ID", tavid);
+			mod.setFieldValue("COMPANY_ID", companyId);
+			mod.setFieldValue("JOB_ID", jobid);
+			pane = new TabulatorsJobsIncreaseRecord(mod, true);
+		}
+		if (aa instanceof EditRecord) {
+			pane = new TabulatorsJobsIncreaseRecord(getRecord(), false);
+		}
+		return pane;
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		Object src = evt.getSource();
-//		Object prp = evt.getPropertyName();
+		// Object prp = evt.getPropertyName();
 		Object selobj = evt.getNewValue();
-				
+
 		// tabulator vigency selected
 		if ((src instanceof TabulatorsTree)) {
 			Record r = (Record) selobj;
-			tabvalRcd =  (r == null) || r.getFieldValue("subnode").equals("") ? null : r;
+			tabvalRcd = (r == null) || r.getFieldValue("subnode").equals("") ? null : r;
 			// save companyid
 			companyId = PlanCSelector.getNodeValue(PlanCSelector.COMPANY);
 		}
 
 		// jobs selected
 		if ((src instanceof JobsTree)) {
-			jobRcd =  (Record) selobj;
+			jobRcd = (Record) selobj;
 		}
 
 		// set the request
 		if (tabvalRcd != null && jobRcd != null) {
-			
-			Object jobid = jobRcd.getFieldValue("id");
-			Object tavid = tabvalRcd.getFieldValue("node");
-			String wc = "tab_validity_id = '" + tavid + "' AND company_id = '" + companyId +"' AND job_id = '"+jobid+"'";
-			DBAccess dba = ConnectionManager.getAccessTo("sle_tab_jobs");
-			Vector<Record> tlist = dba.search(wc, null);
-			Record mod = dba.getModel();
-			mod.setFieldValue("tab_validity_id", tavid);
-			mod.setFieldValue("company_id", companyId);
-			mod.setFieldValue("job_id", jobid);
-
-			ServiceRequest sr = getServicerRequestFromStep(tlist, mod);
+			jobid = jobRcd.getFieldValue("id").toString();
+			tavid = Long.valueOf(tabvalRcd.getFieldValue("node").toString());
+			String wc = "tab_validity_id = '" + tavid + "' AND company_id = '" + companyId + "' AND job_id = '" + jobid
+					+ "'";
+			ServiceRequest sr = new ServiceRequest(ServiceRequest.DB_QUERY, "sle_tab_jobs", wc);
 			setServiceRequest(sr);
-
-			// override table elements and editor listeners
-			JTable jt = getJTable();
-			jt.getDefaultEditor(Double.class).addCellEditorListener(this);
 		} else {
 			setMessage("sle.ui.msg06");
 		}

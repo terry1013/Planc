@@ -2,7 +2,6 @@ package plugin.planc.config;
 
 import gui.*;
 
-
 import com.jgoodies.forms.builder.*;
 import com.jgoodies.forms.layout.*;
 
@@ -24,6 +23,7 @@ public class ClasificationRecord extends AbstractRecordDataInput {
 		String wc = "company_id = '" + rcd.getFieldValue("company_id") + "'";
 		ServiceRequest sr = new ServiceRequest(ServiceRequest.DB_QUERY, "sle_tabulators", wc);
 		RecordSelector rs = new RecordSelector(sr, "id", "name", rcd.getFieldValue("tab_id"), false);
+		rs.insertItemAt(TStringUtils.getTEntry("tentry.none"), 0);
 		addInputComponent("tab_id", rs, false, true);
 		
 		FormLayout lay = new FormLayout("left:pref, 3dlu, pref, 100dlu", // columns

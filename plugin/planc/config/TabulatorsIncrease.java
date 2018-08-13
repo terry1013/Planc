@@ -4,43 +4,47 @@ import gui.*;
 import gui.docking.*;
 
 import java.beans.*;
-import java.util.*;
 
 import javax.swing.*;
-import javax.swing.event.*;
 
+import action.*;
 import core.*;
 import core.datasource.*;
-
-import plugin.planc.*;
-
 
 /**
  * planc SLE_TAB_AMOUNT increase
  * 
  */
-public class TabulatorsIncrease extends AbstractFileIncreaseSupport implements DockingComponent, CellEditorListener {
+public class TabulatorsIncrease extends UIListPanel implements DockingComponent {
 
 	private Record tabvalRcd;
+	private long tabv;
 
 	public TabulatorsIncrease() {
-		super();
+		super(null);
 		putClientProperty(TConstants.SHOW_COLUMNS, "step;amount");
 		putClientProperty(TConstants.ICON_PARAMETERS, "-1; ");
-		putClientProperty(TConstants.ALLOW_INPUT_FROM_CELL, false);
+		setToolBar(new NewRecord(this), new EditRecord(this), new DeleteRecord(this));
 	}
 
 	@Override
 	public void init() {
 		setView(TABLE_VIEW);
 		setMessage("sle.ui.msg07");
-		setFormattForColums(0, "Paso #0");
 	}
 
-	
 	@Override
 	public UIComponentPanel getUIFor(AbstractAction aa) {
-		return null;
+		UIComponentPanel pane = null;
+		if (aa instanceof NewRecord) {
+			Record mod = new Record(getRecordModel());
+			mod.setFieldValue("TAB_VALIDITY_ID", tabv);
+			pane = new TabulatorsIncreaseRecord(mod, true);
+		}
+		if (aa instanceof EditRecord) {
+			pane = new TabulatorsIncreaseRecord(getRecord(), false);
+		}
+		return pane;
 	}
 
 	@Override
@@ -48,27 +52,19 @@ public class TabulatorsIncrease extends AbstractFileIncreaseSupport implements D
 		Object src = evt.getSource();
 		Object prp = evt.getPropertyName();
 		Object selobj = evt.getNewValue();
-		
+
 		// tabulator vigency selected
 		if ((src instanceof TabulatorsTree) && prp.equals(TConstants.RECORD_SELECTED)) {
 			Record r = (Record) selobj;
-			tabvalRcd =  (r == null) || r.getFieldValue("subnode").equals("") ? null : r;
+			tabvalRcd = (r == null) || r.getFieldValue("subnode").equals("") ? null : r;
 		}
 
 		// set the request
 		if (tabvalRcd != null) {
-			Long tabv = new Long((String) tabvalRcd.getFieldValue("node"));
-			Vector<Record> srclist = ConnectionManager.getAccessTo("SLE_TAB_AMOUNT").search("tab_validity_id = " + tabv,
-					null);
-			Record rmod = ConnectionManager.getAccessTo("SLE_TAB_AMOUNT").getModel();
-			rmod.setFieldValue("tab_validity_id", tabv);
-
-			ServiceRequest sr = getServicerRequestFromStep(srclist, rmod);
+			tabv = new Long((String) tabvalRcd.getFieldValue("node"));
+			ServiceRequest sr = new ServiceRequest(ServiceRequest.DB_QUERY, "SLE_TAB_AMOUNT", "tab_validity_id = "
+					+ tabv);
 			setServiceRequest(sr);
-
-			// override table elements and editor listeners
-			JTable jt = getJTable();
-			jt.getDefaultEditor(Double.class).addCellEditorListener(this);
 		} else {
 			setMessage("sle.ui.msg07");
 		}

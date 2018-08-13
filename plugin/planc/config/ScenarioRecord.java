@@ -67,10 +67,10 @@ public class ScenarioRecord extends AbstractRecordDataInput {
 		pb.add(getInputComponent("status"), cc.xy(3, 8));
 		// pb.add(getLabelFor("process_id"), cc.xy(5, 8));
 		// pb.add(getInputComponent("process_id"), cc.xy(7, 8));
-		pb.add(getLabelFor("company_id"), cc.xy(1, 10));
-		pb.add(getInputComponent("company_id"), cc.xy(3, 10));
-		pb.add(getLabelFor("salary_scheme"), cc.xy(5, 10));
-		pb.add(getInputComponent("salary_scheme"), cc.xy(7, 10));
+//		pb.add(getLabelFor("company_id"), cc.xy(1, 10));
+//		pb.add(getInputComponent("company_id"), cc.xy(3, 10));
+		pb.add(getLabelFor("salary_scheme"), cc.xy(1, 10));
+		pb.add(getInputComponent("salary_scheme"), cc.xy(3, 10));
 		pb.add(getLabelFor("currency_id"), cc.xy(1, 12));
 		pb.add(getInputComponent("currency_id"), cc.xy(3, 12));
 		pb.add(getLabelFor("start_forecast"), cc.xy(5, 12));

@@ -78,13 +78,14 @@ public class TDefaultTableCellRenderer extends DefaultTableCellRenderer {
 		setOpaque(true);
 		// temporal??: if value is double and value < 9.00, show diferenciable font to remark the cell. Some class has
 		// too many doubles and is difficult to see the number from #.00 format
-		setFont(font);
-		if (value instanceof Double) {
-			double d = (Double) value;
-			if (d < 9 && d > 0) {
-				setFont(fontBold);
-			}
-		}
+		// 180813: REMOVED
+//		setFont(font);
+//		if (value instanceof Double) {
+//			double d = (Double) value;
+//			if (d < 9 && d > 0) {
+//				setFont(fontBold);
+//			}
+//		}
 		if (!isSelected) {
 			// setBackground((row % 2 == 0) ? pair_color : odd_color);
 		}

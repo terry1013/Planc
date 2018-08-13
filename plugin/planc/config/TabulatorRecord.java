@@ -18,7 +18,7 @@ public class TabulatorRecord extends AbstractRecordDataInput {
 	public TabulatorRecord(Record rcd, boolean newr) {
 		super(null, rcd, newr);
 
-		addInputComponent("id", TUIUtils.getJTextField(rcd, "id"), true, true);
+		addInputComponent("id", TUIUtils.getJTextField(rcd, "id"), true, newr);
 		addInputComponent("name", TUIUtils.getJTextArea(rcd, "name"), false, true);
 
 		FormLayout lay = new FormLayout("left:pref, 3dlu, pref, 7dlu, left:pref, 3dlu, 50dlu", // columns

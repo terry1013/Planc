@@ -46,7 +46,7 @@ public class TWebFrame extends WebFrame {
 		v.add(TResourceUtils.getIcon("appicon", 32).getImage());
 		setIconImages(v);
 		setShowResizeCorner(true);
-		WebLookAndFeel.setDecorateFrames(false);
+//		WebLookAndFeel.setDecorateFrames(false);
 
 		SwingTimerTimingSource ts = new SwingTimerTimingSource();
 		AnimatorBuilder.setDefaultTimingSource(ts);

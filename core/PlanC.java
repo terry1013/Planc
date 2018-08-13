@@ -26,6 +26,7 @@ import javax.swing.*;
 
 import net.infonode.docking.*;
 
+import org.apache.commons.logging.impl.*;
 import org.jdesktop.core.animation.timing.*;
 import org.jdesktop.swing.animation.timing.sources.*;
 
@@ -108,6 +109,8 @@ public class PlanC {
 			}
 			logger.addHandler(fh);
 			logger.addHandler(ch);
+			// point apache log to this log
+			System.setProperty("org.apache.commons.logging.Log", Jdk14Logger.class.getName());
 
 			TPreferences.init();
 			TStringUtils.init();
@@ -145,8 +148,8 @@ public class PlanC {
 		// JFileChooser fc = new JFileChooser();
 
 		WebLookAndFeel.install();
-		WebLookAndFeel.setDecorateFrames(true);
-		WebLookAndFeel.setDecorateDialogs(true);
+//		WebLookAndFeel.setDecorateFrames(true);
+//		WebLookAndFeel.setDecorateDialogs(true);
 
 		UIManager.put("OptionPane.errorIcon", i1);
 		UIManager.put("OptionPane.informationIcon", i2);
@@ -311,19 +314,22 @@ public class PlanC {
 	}
 
 	public static void executeFinal() {
+		/*
 		try {
 			Thread.sleep(250);
 		} catch (InterruptedException e) {
-
 		}
-		PlanC.configureWorkMenuBar();
+*/
 		actPane = new DockingContainer();
 		frame.setContentPane(actPane);
-		DockingContainer.fireProperty("", TConstants.PATH_SELECTED, PlanCSelector.getActualPath());
+		
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
+				PlanC.configureWorkMenuBar();
+				DockingContainer.loadView(null);
+				DockingContainer.fireProperty("", TConstants.PATH_SELECTED, PlanCSelector.getActualPath());
 				DockingContainer.performTransition(DockingContainer.getRootWindow());
 			}
 		});

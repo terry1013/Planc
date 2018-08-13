@@ -1,8 +1,10 @@
-2018-08-02 15:25:46 Connecting to database CsvJdbc () with *autoconnection=false
-2018-08-02 15:25:46 Connecting to database Flicka () with *autoconnection=false
-2018-08-02 15:25:46 Looking for parameters in externa file.
-2018-08-02 15:25:46 Connecting to database SleOracle (SLEPLANC) with *autoconnection=true
-2018-08-02 15:25:48 Connecting to database eTeam () with *autoconnection=false
-2018-08-02 15:25:48 Plugin SLEPlanC found
-2018-08-02 15:25:48 Plugin SLEPlanC.startPlugin() sucsefully
-2018-08-02 15:26:04 Looking for parameters in externa file.
+2018-08-13 18:06:55 Connecting to database CsvJdbc () with *autoconnection=false
+2018-08-13 18:06:55 Connecting to database Flicka () with *autoconnection=false
+2018-08-13 18:06:55 Looking for parameters in externa file.
+2018-08-13 18:06:55 Connecting to database SleOracle (SLEPLANC) with *autoconnection=true
+2018-08-13 18:06:56 Connecting to database eTeam () with *autoconnection=false
+2018-08-13 18:06:57 Plugin SLEPlanC found
+2018-08-13 18:06:57 Plugin SLEPlanC.startPlugin() sucsefully
+2018-08-13 18:07:00 Looking for parameters in externa file.
+2018-08-13 18:07:09 No key field found for database table SLE_PLANC_GEN_ACCOUNT
+2018-08-13 18:07:09 Database table SLE_PLANC_GEN_ACCOUNT keys fields alter by DBAccess.

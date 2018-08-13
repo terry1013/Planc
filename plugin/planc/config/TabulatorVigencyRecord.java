@@ -18,7 +18,7 @@ public class TabulatorVigencyRecord extends AbstractRecordDataInput {
 	public TabulatorVigencyRecord(Record rcd, boolean newr) {
 		super(null, rcd, newr);
 
-		addInputComponent("validity", TUIUtils.getWebDateField(rcd, "validity"), true, true);
+		addInputComponent("validity", TUIUtils.getWebDateField(rcd, "validity"), true, newr);
 		addInputComponent("name", TUIUtils.getJTextField(rcd, "name"), true, true);
 		addInputComponent("narrative", TUIUtils.getJTextArea(rcd, "narrative"), false, true);
 

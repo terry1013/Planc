@@ -20,7 +20,8 @@ public class ScaleRecord extends AbstractRecordDataInput {
 		super(null, rcd, newr);
 
 		addInputComponent("name", TUIUtils.getJTextField(rcd, "name"), true, true);
-		addInputComponent("classif", SLEPlanC.getJComboBox("scaleClassif", rcd, "classif"), false, true);
+		// not editable 
+		addInputComponent("classif", SLEPlanC.getJComboBox("scaleClassif", rcd, "classif"), false, newr);
 
 		rcd.setFieldValue("time_unit", rcd.getFieldValue("time_unit").toString());
 		addInputComponent("time_unit", SLEPlanC.getJComboBox("timeUnit", rcd, "time_unit"), false, true);
@@ -28,7 +29,7 @@ public class ScaleRecord extends AbstractRecordDataInput {
 		addInputComponent("start_dtype", SLEPlanC.getJComboBox("dateType", rcd, "start_dtype"), false, true);
 		addInputComponent("end_dtype", SLEPlanC.getJComboBox("dateType", rcd, "end_dtype"), false, true);
 		addInputComponent("compare_dtype", SLEPlanC.getJComboBox("dateType", rcd, "compare_dtype"), false, true);
-		addInputComponent("affinities", SLEPlanC.getCheckComboBox("affinity", rcd, "affinities"), false, true);
+		addInputComponent("affinities", TUIUtils.getJTextField(rcd, "affinities"), false, true);
 
 		rcd.setFieldValue("omit_titular", rcd.getFieldValue("omit_titular").equals(1));
 		addInputComponent("omit_titular", TUIUtils.getJCheckBox(rcd, "omit_titular"), false, true);

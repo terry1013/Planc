@@ -7,9 +7,7 @@ import javax.swing.*;
 import core.*;
 import core.datasource.*;
 import core.reporting.*;
-
 import plugin.planc.*;
-
 import action.*;
 
 /**
@@ -45,7 +43,9 @@ public class ScenariosList extends UIListPanel {
 	public UIComponentPanel getUIFor(AbstractAction aa) {
 		UIComponentPanel pane = null;
 		if (aa instanceof NewRecord) {
-			pane = new ScenarioRecord(getRecordModel(), true);
+			Record mod = getRecordModel();
+			mod.setFieldValue("id", System.currentTimeMillis());
+			pane = new ScenarioRecord(mod, true);
 		}
 		if (aa == clone) {
 			pane = new ScenarioCopyDataRecord(getRecord());

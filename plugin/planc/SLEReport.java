@@ -76,7 +76,8 @@ public class SLEReport extends Report {
 		String rn = (String) reportParameters.get(ReportParameters.REPORT_NAME);
 		String ff = (String) reportParameters.get(ReportParameters.FILE_FORMAT);
 
-		if (ff.equals(".xls") || ff.equals(".xlso")) {
+		if (reportParameters.get(ReportParameters.OUT_TYPE).equals(ReportParameters.EXPORT)
+				&& (ff.equals(".xls") || ff.equals(".xlso"))) {
 			// specia treatment for:
 			if (rn.equals("AccountingInterfaceJDE")) {
 				String ef = (String) reportParameters.get(ReportParameters.FILE_NAME);

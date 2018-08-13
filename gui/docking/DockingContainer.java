@@ -64,7 +64,7 @@ public class DockingContainer extends JPanel {
 		amountViewer.init();
 
 		configureRootWindow();
-		loadView(null);
+//		loadView(null);
 
 		backgroundPanel = TUIUtils.getBackgroundPanel();
 		transitionPanel = new ComponentTransition();
