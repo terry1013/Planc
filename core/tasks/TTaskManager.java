@@ -210,9 +210,7 @@ class CheckInactivity implements Runnable, MouseMotionListener {
 	@Override
 	public void run() {
 		if (((System.currentTimeMillis() - lastMouseMove) > signOut) && (Session.getUser() != null)) {
-			PlanC.saveProperty();
-			TAbstractAction.shutdown();
-			Session.setUser(null);
+			SignOut.signOut();
 		}
 	}
 	@Override

@@ -28,7 +28,16 @@ public class SignOut extends TAbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		signOut();
+	}
+	
+	/**
+	 * Static method that perform the sign out of the application.
+	 * 
+	 */
+	public static void signOut(){
 		PlanC.saveProperty();
+		TAbstractAction.shutdown();
 		Session.setUser(null);
 	}
 }
