@@ -148,8 +148,8 @@ public class PlanC {
 		// JFileChooser fc = new JFileChooser();
 
 		WebLookAndFeel.install();
-//		WebLookAndFeel.setDecorateFrames(true);
-//		WebLookAndFeel.setDecorateDialogs(true);
+		// WebLookAndFeel.setDecorateFrames(true);
+		// WebLookAndFeel.setDecorateDialogs(true);
 
 		UIManager.put("OptionPane.errorIcon", i1);
 		UIManager.put("OptionPane.informationIcon", i2);
@@ -215,7 +215,12 @@ public class PlanC {
 			actPane = new PUserLogIn();
 			JButton jb = (JButton) ((PUserLogIn) actPane).getClientProperty(TConstants.DEFAULT_BUTTON);
 			frame.getRootPane().setDefaultButton(jb);
-			frame.setContent(actPane);
+
+			// TODO: bug when user or sistem sign out the app, the dockein pane still inside the frame and cause a blink
+			// error.temporaly use setcontentpane method
+			// frame.setContent(actPane);
+			frame.setContentPane(actPane);
+
 			frame.pack();
 			frame.setLocationRelativeTo(null);
 			frame.setVisible(true);
@@ -275,6 +280,9 @@ public class PlanC {
 		if (p == DOCKING) {
 			oldBound = frame.getBounds();
 
+			// TODO: temporal. bug when sign out action is performed
+			frame.setContentPane(new JPanel());
+
 			// frame bound
 			Rectangle sbound = (Rectangle) TPreferences.getPreference(TPreferences.WINDOW_BOUND, PlanC.class.getName(),
 					frame.getSizeBy(0.7));
@@ -315,14 +323,11 @@ public class PlanC {
 
 	public static void executeFinal() {
 		/*
-		try {
-			Thread.sleep(250);
-		} catch (InterruptedException e) {
-		}
-*/
+		 * try { Thread.sleep(250); } catch (InterruptedException e) { }
+		 */
 		actPane = new DockingContainer();
 		frame.setContentPane(actPane);
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
@@ -488,8 +493,8 @@ public class PlanC {
 		// ---------------------------------------------------------------
 		menu = new JMenu(TStringUtils.getBundleString("main.menuitem.help"));
 		// g7.add(new Help());
-//		menu.add(new UpdateManifestView());
-//		menu.add(new JSeparator(JSeparator.HORIZONTAL));
+		// menu.add(new UpdateManifestView());
+		// menu.add(new JSeparator(JSeparator.HORIZONTAL));
 		// menu.add(new DockingAction(Wellcome.class));
 		// menu.add(new DockingAction(HelpBrowser.class));
 		// HelpRecorderAction act = new HelpRecorderAction();

@@ -27,7 +27,7 @@ public class AmountViewerTask implements TCallable<Hashtable<String, ServiceRequ
 	private Hashtable<String, Record> wofoNode;
 	private Hashtable<String, Record> accoNode;
 	private Hashtable<String, Record> bu__Node;
-	// private Future<Hashtable<String, ServiceRequest>> future;
+	private Future future;
 	private String companyId, scenarioId;
 	private JComponent waitComponent;
 
@@ -135,7 +135,7 @@ public class AmountViewerTask implements TCallable<Hashtable<String, ServiceRequ
 
 	@Override
 	public void setFuture(Future<Hashtable<String, ServiceRequest>> f, boolean ab) {
-		// this.future = f;
+		this.future = f;
 	}
 
 	@Override
@@ -143,6 +143,9 @@ public class AmountViewerTask implements TCallable<Hashtable<String, ServiceRequ
 		try {
 			// process 1 worker at time
 			for (int cnt = 0; cnt < workForce.size(); cnt++) {
+				if (future.isCancelled()) {
+					break;
+				}
 				Record workRecord = workForce.elementAt(cnt);
 				processRecord(workRecord);
 				int per = cnt * 100 / workForce.size();
@@ -172,7 +175,7 @@ public class AmountViewerTask implements TCallable<Hashtable<String, ServiceRequ
 		for (Record amountrcd : amountlist) {
 			// 1821: process the ammount records if account type_id = 0
 			Record air = accdba.exist("ID = " + amountrcd.getFieldValue("account_id"));
-	//		System.out.println(air.getFieldValue("type_id"));
+			// System.out.println(air.getFieldValue("type_id"));
 			if (((Long) air.getFieldValue("type_id")) != 0L) {
 				continue;
 			}

@@ -22,9 +22,12 @@ import javax.swing.tree.*;
 import plugin.planc.dashboard.*;
 
 import com.alee.laf.tree.*;
+import com.alee.managers.language.data.*;
+import com.alee.managers.tooltip.*;
 
 import core.*;
 import core.datasource.*;
+import core.datasource.Record;
 
 /**
  * This example shows how to create a simple JTreeTable component, by using a JTree as a renderer (and editor) for the
@@ -134,20 +137,21 @@ public class JTreeTable extends JTable {
 	}
 
 	/**
-	 * A TreeCellRenderer that displays a JTree. WARING: this implementation is only for {@link AmountViewer}
+	 * A TreeCellRenderer that displays a JTree.
+	 * 
+	 * <p>
+	 * WARRING: {@link TreeSelectionListener} is implemented only for {@link AmountViewer}
 	 */
 	public class TreeTableCellRenderer extends WebTree implements TableCellRenderer, TreeSelectionListener {
 		/** Last table/tree row asked to renderer. */
 		protected int visibleRow;
-		// private ExtendedJLabel formatter;
 
 		public TreeTableCellRenderer(TreeModel model) {
 			super(model);
-			// this.formatter = new ExtendedJLabel();
 			setRootVisible(false);
-			// TODO: temporal for amountViewer
+
+			// for amountViewer
 			addTreeSelectionListener(this);
-			ToolTipManager.sharedInstance().registerComponent(this);
 			setCellRenderer(new TreeTableTreeCellRenderer("av_src_file"));
 			setRolloverSelectionEnabled(false);
 		}
@@ -216,8 +220,8 @@ public class JTreeTable extends JTable {
 		public void valueChanged(TreeSelectionEvent tse) {
 			TreePath tp = tse.getNewLeadSelectionPath();
 			if (tp != null) {
-			//	JTreeTable.TreeTableCellRenderer ttcr = (JTreeTable.TreeTableCellRenderer) tse.getSource();
-			//	TreeCellRenderer tcr = ttcr.getCellRenderer();
+				// JTreeTable.TreeTableCellRenderer ttcr = (JTreeTable.TreeTableCellRenderer) tse.getSource();
+				// TreeCellRenderer tcr = ttcr.getCellRenderer();
 				DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.getLastPathComponent();
 				Record rcd = (Record) ((TEntry) dmtn.getUserObject()).getKey();
 				String ttt = null;
@@ -227,16 +231,16 @@ public class JTreeTable extends JTable {
 					String expr = (String) rcd.getFieldValue("av_formula_expr");
 					eval = eval.replaceAll("\n", "<br>");
 					expr = expr.replaceAll("\n", "<br>");
+					eval = eval.replaceAll(" ", "&nbsp;");
+					expr = expr.replaceAll(" ", "&nbsp;");
 					// String tip = "Evaluacion:\n" + eval + "\nExpresion:\n" + expr;
 					ttt = "<html><b>Evaluacion:</b><br>" + eval + "<br><b>Expresion:</b><br>" + expr + "</html>";
-					System.out.println(ttt);
-					// TooltipManager.showOneTimeTooltip(this, null, tip, TooltipWay.trailing);
-					// TooltipManager.setTooltip(this, tip, TooltipWay.trailing, 0);
+//					System.out.println(ttt);
+					Point pf = PlanC.frame.getLocationOnScreen();
+					Point pm = MouseInfo.getPointerInfo().getLocation();
+					Point p = new Point(pm.x - pf.x, pm.y - pf.y);
+					TooltipManager.showOneTimeTooltip(PlanC.frame, p, ttt);
 				}
-				setToolTipText(ttt);
-				// TooltipManager.showOneTimeTooltip(this, null, ttt, TooltipWay.trailing);
-				// TooltipManager.setTooltip(this, ttt, TooltipWay.trailing);
-
 			}
 		}
 	}
@@ -383,6 +387,12 @@ public class JTreeTable extends JTable {
 		}
 	}
 
+	/**
+	 * Specific implementation for {@link AmountViewer}
+	 * 
+	 * @author terry
+	 *
+	 */
 	public class TreeTableTreeCellRenderer extends DefaultTreeCellRenderer {
 
 		private String fieldIconN;

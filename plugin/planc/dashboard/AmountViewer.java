@@ -5,6 +5,7 @@ import gui.docking.*;
 import gui.jtreetable.*;
 import gui.tree.*;
 
+import java.awt.event.*;
 import java.beans.*;
 import java.util.*;
 import java.util.concurrent.*;
@@ -51,6 +52,15 @@ public class AmountViewer extends UIComponentPanel
 		exportToFileAction = new ExportToFileAction(this,
 				"av_src_file;av_path;av_formula_eval;av_formula_expr;av_pattern;av_srcrecord");
 		addToolBarAction(exportToFileAction);
+		RefreshAction ra = new RefreshAction(this) {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				recalc();
+			}
+		};
+		ra.setIcon("RefreshAction");
+		ra.setToolTip("ttaction.RefreshAction");
+		addToolBarAction(ra);
 		addPropertyChangeListener(TConstants.ACTION_PERFORMED, this);
 		amountViewer = this;
 		add(scrollPane);
@@ -126,7 +136,6 @@ public class AmountViewer extends UIComponentPanel
 		underModel.setServiceRequest(sr);
 		treeTableModel = new AmountViewTreeTableModel(underModel);
 		treeTable = new JTreeTable(treeTableModel);
-		// treeTable.setDefaultRenderer(Double.class, ren);
 		scrollPane.setViewportView(treeTable);
 
 		// preferred column with
@@ -147,9 +156,11 @@ public class AmountViewer extends UIComponentPanel
 	@Override
 	public void taskDone(Future f) {
 		try {
-			services = future.get();
-			changeView(lastView);
-			exportToFileAction.addParameter("viewName", lastView);
+			if (!future.isCancelled()) {
+				services = future.get();
+				changeView(lastView);
+				exportToFileAction.addParameter("viewName", lastView);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
