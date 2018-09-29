@@ -26,7 +26,6 @@ and (workrelation_id = $P{workforceID} or $P{workforceID} is null)
 ORDER BY
      cost_center,account_id,date_slot]]>
 	</queryString>
-	<field name="NAME" class="java.lang.String"/>
 	<field name="DATE_SLOT" class="java.util.Date"/>
 	<field name="ACCOUNT_ID" class="java.math.BigDecimal"/>
 	<field name="AMOUNT" class="java.math.BigDecimal"/>

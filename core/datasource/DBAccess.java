@@ -640,6 +640,10 @@ public class DBAccess {
 				if (tableName.equals("SLE_USER_CALC_TYPES")) {
 					pkls = new String[]{"user_id", "calc_type_id"};
 				}
+				if (tableName.equals("SLE_VIEW_PLANC_ACCOUNTING_DIST")) {
+					pkls = new String[]{"scenario_id", "company_id", "workrelation_id"};
+				}
+				
 				
 				if (pkls.length > 0) {
 					SystemLog.warning("Database table " + tableName + " keys fields alter by DBAccess.");

@@ -38,7 +38,7 @@ public class Record implements java.io.Serializable {
 					sr.fields[l].iskey, sr.fields[l].isnullable, sr.fields[l].classname);
 		}
 	}
-
+	
 	/**
 	 * nueva instancia
 	 * 
@@ -49,6 +49,27 @@ public class Record implements java.io.Serializable {
 	public Record(String tn, Field[] fs) {
 		this.tableName = tn.toUpperCase();
 		this.fields = fs;
+	}
+
+	/**
+	 * Set the same internal reference from fields inside srcRcd to the field in destRcd.
+	 * <p>
+	 * this method look for values from all fields names in destRcd and if such field name exist in srcRcd, then set the
+	 * field value in destRcd AS THE SAME INTERNAL VALUE of srcRcd
+	 * 
+	 * @param srcRcd - source record from which obtain values
+	 * @param destRcd - destination record to set the values 
+	 */
+	public static void copyFields(Record srcRcd, Record destRcd) {
+		for (int c = 0; c < srcRcd.getFieldCount(); c++) {
+			String fn = destRcd.getFieldName(c);
+			try {
+				Object srco = srcRcd.getFieldValue(fn);
+				destRcd.setFieldValue(fn, srco);
+			} catch (Exception e) {
+				// field does'n exist. do nothing
+			}
+		}
 	}
 
 	public void addNewField(Field f) {
@@ -157,6 +178,14 @@ public class Record implements java.io.Serializable {
 		return getExternalFieldValue(getIndexOf(fn));
 	}
 
+	public Field getField(int c) {
+		return fields[c];
+	}
+	
+	public Field getField(String fn) {
+		return fields[getIndexOf(fn)];
+	}
+	
 	/**
 	 * return the numbers of fields inside this record
 	 * 
@@ -164,14 +193,6 @@ public class Record implements java.io.Serializable {
 	 */
 	public int getFieldCount() {
 		return fields.length;
-	}
-	
-	public Field getField(int c) {
-		return fields[c];
-	}
-	
-	public Field getField(String fn) {
-		return fields[getIndexOf(fn)];
 	}
 
 	/**
@@ -311,12 +332,14 @@ public class Record implements java.io.Serializable {
 	}
 	
 	/**
-	 * set the tablename for this record
+	 * Returns whether the field idexed by <code>c</code> is a key field of this table.
 	 * 
-	 * @param tn - table name
+	 * @param c - index of field
+	 * 
+	 * @return <code>true</code> if <code>fn</code> is a key field
 	 */
-	public void setTableName(String tn) {
-		tableName = tn.toUpperCase();
+	public boolean isKeyField(int c) {
+		return fields[c].iskey;
 	}
 
 	/**
@@ -343,17 +366,6 @@ public class Record implements java.io.Serializable {
 		return isConstantID(getIndexOf(fn));
 	}
 	 */
-
-	/**
-	 * Returns whether the field idexed by <code>c</code> is a key field of this table.
-	 * 
-	 * @param c - index of field
-	 * 
-	 * @return <code>true</code> if <code>fn</code> is a key field
-	 */
-	public boolean isKeyField(int c) {
-		return fields[c].iskey;
-	}
 
 	/**
 	 * Returns whether the field <code>fn</code> is a key field of this table.
@@ -417,6 +429,15 @@ public class Record implements java.io.Serializable {
 	 */
 	public void setFieldValue(String n, Object v) {
 		setFieldValue(getIndexOf(n), v);
+	}
+
+	/**
+	 * set the tablename for this record
+	 * 
+	 * @param tn - table name
+	 */
+	public void setTableName(String tn) {
+		tableName = tn.toUpperCase();
 	}
 	@Override
 	public String toString() {

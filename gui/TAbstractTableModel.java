@@ -89,6 +89,7 @@ public class TAbstractTableModel extends AbstractTableModel {
 
 	@Override
 	public String getColumnName(int col) {
+//		System.out.println(rcdModel.getFieldName(col));
 		return isTranspose ? transposeColumnName + " " + col : rcdModel.getFieldName(col);
 	}
 
