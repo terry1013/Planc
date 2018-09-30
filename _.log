@@ -1,18 +1,18 @@
-2018-09-29 15:26:15 Connecting to database CsvJdbc () with *autoconnection=false
-2018-09-29 15:26:15 Connecting to database Flicka () with *autoconnection=false
-2018-09-29 15:26:15 Looking for parameters in externa file.
-2018-09-29 15:26:15 Connecting to database SleOracle (SLEPLANC) with *autoconnection=true
-2018-09-29 15:26:21 Connecting to database eTeam () with *autoconnection=false
-2018-09-29 15:26:21 Plugin SLEPlanC found
-2018-09-29 15:26:21 Plugin SLEPlanC.startPlugin() sucsefully
-2018-09-29 15:28:54 Looking for parameters in externa file.
-2018-09-29 15:29:05 No key field found for database table SLE_PLANC_GEN_ACCOUNT
-2018-09-29 15:29:05 Database table SLE_PLANC_GEN_ACCOUNT keys fields alter by DBAccess.
-2018-09-29 15:35:31 No key field found for database table SLE_VIEW_PLANC_ACCOUNTING_DIST
-2018-09-29 15:35:31 Database table SLE_VIEW_PLANC_ACCOUNTING_DIST keys fields alter by DBAccess.
-2018-09-29 15:35:40 Loading XML bean definitions from URL [jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-chart-themes-6.3.1.jar!/net/sf/jasperreports/chartthemes/spring/beans/chartThemesBeans.xml]
-2018-09-29 15:35:41 Loading XML bean definitions from URL [jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-chart-themes-6.3.1.jar!/net/sf/jasperreports/chartthemes/spring/beans/chartConstantsBean.xml]
-2018-09-29 15:35:41 Loading XML bean definitions from URL [jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-chart-themes-6.3.1.jar!/net/sf/jasperreports/chartthemes/spring/beans/defaultChartPropertiesBean.xml]
-2018-09-29 15:35:41 Loading XML bean definitions from URL [jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-chart-themes-6.3.1.jar!/net/sf/jasperreports/chartthemes/spring/beans/eyeCandySixtiesChartPropertiesBean.xml]
-2018-09-29 15:35:41 Loading XML bean definitions from URL [jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-chart-themes-6.3.1.jar!/net/sf/jasperreports/chartthemes/spring/beans/aegeanChartPropertiesBean.xml]
-2018-09-29 15:35:41 Extension resource jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-javaflow-6.3.1.jar!/jasperreports_extension.properties was found to be a duplicate of jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-6.3.1.jar!/jasperreports_extension.properties in classloader sun.misc.Launcher$AppClassLoader@1d16e93
+2018-09-29 20:08:56 Connecting to database CsvJdbc () with *autoconnection=false
+2018-09-29 20:08:56 Connecting to database Flicka () with *autoconnection=false
+2018-09-29 20:08:56 Looking for parameters in externa file.
+2018-09-29 20:08:56 Connecting to database SleOracle (SLEPLANC) with *autoconnection=true
+2018-09-29 20:09:04 Connecting to database eTeam () with *autoconnection=false
+2018-09-29 20:09:04 Plugin SLEPlanC found
+2018-09-29 20:09:04 Plugin SLEPlanC.startPlugin() sucsefully
+2018-09-29 20:09:10 Looking for parameters in externa file.
+2018-09-29 20:09:26 No key field found for database table SLE_PLANC_GEN_ACCOUNT
+2018-09-29 20:09:26 Database table SLE_PLANC_GEN_ACCOUNT keys fields alter by DBAccess.
+2018-09-29 20:10:02 No key field found for database table SLE_VIEW_PLANC_ACCOUNTING_DIST
+2018-09-29 20:10:02 Database table SLE_VIEW_PLANC_ACCOUNTING_DIST keys fields alter by DBAccess.
+2018-09-29 20:10:35 Loading XML bean definitions from URL [jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-chart-themes-6.3.1.jar!/net/sf/jasperreports/chartthemes/spring/beans/chartThemesBeans.xml]
+2018-09-29 20:10:36 Loading XML bean definitions from URL [jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-chart-themes-6.3.1.jar!/net/sf/jasperreports/chartthemes/spring/beans/chartConstantsBean.xml]
+2018-09-29 20:10:36 Loading XML bean definitions from URL [jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-chart-themes-6.3.1.jar!/net/sf/jasperreports/chartthemes/spring/beans/defaultChartPropertiesBean.xml]
+2018-09-29 20:10:36 Loading XML bean definitions from URL [jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-chart-themes-6.3.1.jar!/net/sf/jasperreports/chartthemes/spring/beans/eyeCandySixtiesChartPropertiesBean.xml]
+2018-09-29 20:10:36 Loading XML bean definitions from URL [jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-chart-themes-6.3.1.jar!/net/sf/jasperreports/chartthemes/spring/beans/aegeanChartPropertiesBean.xml]
+2018-09-29 20:10:36 Extension resource jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-javaflow-6.3.1.jar!/jasperreports_extension.properties was found to be a duplicate of jar:file:/C:/Users/terry/Documents/java%20project/planc/lib/jasperreport/jasperreports-6.3.1.jar!/jasperreports_extension.properties in classloader sun.misc.Launcher$AppClassLoader@1d16e93

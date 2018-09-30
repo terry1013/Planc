@@ -271,7 +271,6 @@ public class Report implements TCallable<JasperPrint> {
 	 */
 	protected void setReportParameters() {
 		jasperParameters.put("report.date", new Date());
-		jasperParameters.put("report.logo", TResourceUtils.getFile("images/Report_logo.gif").getAbsolutePath());
 
 		// todos los campos de la compañia seleccionada se establecen como parametros
 		// Record p = Session.getPartner();

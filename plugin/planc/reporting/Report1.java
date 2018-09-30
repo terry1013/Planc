@@ -7,6 +7,7 @@ import java.util.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.*;
 import plugin.planc.*;
+import core.*;
 import core.datasource.*;
 import core.reporting.*;
 
@@ -19,6 +20,15 @@ public class Report1 extends SLEReport {
 
 	public Report1(Hashtable rp) {
 		super(rp);
+	}
+	
+	@Override
+	public void setReportParameters() {
+		super.setReportParameters();
+		
+		// example: adicional parameters for this report
+		jasperParameters.put("report.logo", TResourceUtils.getFile("images/appicon.gif").getAbsolutePath());
+
 	}
 
 	@Override
@@ -175,7 +185,7 @@ public class Report1 extends SLEReport {
 		for (int i = 0; i < list.size(); i++) {
 			Date d = (Date) list.elementAt(i).getFieldValue("DATE_SLOT");
 			rcdModel.addNewField(new Field("amount_slot" + i, new Double(0.0), 10));
-			jasperParameters.put("DATE_SLOT" + i, d);
+			jasperParameters.put("date_slot" + i, d);
 			date_slot_index.put(d, i);
 		}
 	}
